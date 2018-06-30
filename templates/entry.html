@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Metonymize VoF Parser</h1>
+<h3>Map NFL Voice of Fan from Game Day into actionable records.</h3>
+  <p>
+  Converts natural language feedback into actionable topic areas and ratings consistent with fan survey data.
+  </p>
+
+<form method='POST' action='/nflParser'>
+  <table BORDER = 1>
+    <p>Share your Fan Voice: </p>
+  <p></p>
+  <tr><td><input name='Narrative' type='TEXT'
+      value='The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.'
+    </td>
+    </tr>
+</table>
+<p><em>Click to parse:</em>
+<input value='RUN' type='SUBMIT'></p>
+</form>
+
+{% endblock %}
