@@ -9,15 +9,24 @@
 </p>
 <form method='POST' action='/nflParser'>
   <div>
-    <label for="narrative" class="f6 b db mb2">Share your Fan Voice</label>
+    <div class="mb2">
+      <!-- <label for="narrative" class="f6 b">Share your Fan Voice</label> -->
+
+      <small id="comment-desc" class="f6 black-60">
+        <div onclick="example1()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 1</div>
+        <div onclick="example2()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 2</div>
+        <div onclick="example3()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 3</div>
+      </small>
+    </div>
+
     <textarea id="narrative" name="narrative"
               class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
               aria-describedby="comment-desc"
               rows="5"
-              autocapitalize="sentences" wrap="soft" required>
-The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.
-    </textarea>
-    <!-- <small id="comment-desc" class="f6 black-60">Helper text for a form control. Can use this text to <a href="#" class="link underline black-80 hover-blue">link to more info.</a></small> -->
+              placeholder="Share your Fan Voice"
+              autocapitalize="sentences" wrap="soft"
+              required></textarea>
+
   </div>
   <div class="mt3">
     <input
@@ -26,4 +35,18 @@ The parking delayed us by over an hour. The fries made up for this a little. The
   </div>
 </form>
 
+<script>
+ const setNarrative = function(s) {
+   document.getElementById('narrative').value = s;
+ }
+ const example1 = function() {
+   setNarrative('The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.');
+ }
+ const example2 = function() {
+   setNarrative('The ushers were very helpful in finding our seats. The seats were uncomfortable. The nachos were tasty');
+ }
+ const example3 = function() {
+   setNarrative('Getting through the security line was a slow process. This could be improved. The new jumbotron was fantastic.');
+ }
+</script>
 {% endblock %}
