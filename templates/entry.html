@@ -11,7 +11,7 @@
 <form method='POST' action='/nflParser'>
   <div>
     <label for="narrative" class="f6 b db mb2">Share your Fan Voice</label>
-    <textarea id="narrative" name="narrative" 
+    <textarea id="narrative" name="narrative"
               class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
               aria-describedby="comment-desc"
               rows="5"
@@ -20,10 +20,11 @@ The parking delayed us by over an hour. The fries made up for this a little. The
     </textarea>
     <!-- <small id="comment-desc" class="f6 black-60">Helper text for a form control. Can use this text to <a href="#" class="link underline black-80 hover-blue">link to more info.</a></small> -->
   </div>
-
-  <p>
-    <input type='submit' value='Parse'>
-  </p>
+  <div class="mt3">
+    <input
+      class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
+      type='submit' value='Parse'>
+  </div>
 </form>
 
 {% endblock %}
