@@ -2,23 +2,51 @@
 
 {% block body %}
 
-<h1>Metonymize VoF Parser</h1>
-<h3>Map NFL Voice of Fan from Game Day into actionable records.</h3>
-  <p>
+<h1 class="f3 f2-m f1-l">Metonymize VoF Parser</h1>
+<h2 class="f5 f4-m f3-l">Map NFL Voice of Fan from Game Day into actionable records.</h2>
+<p class="lh-copy">
   Converts natural language feedback into actionable topic areas and ratings consistent with fan survey data.
-  </p>
-
+</p>
 <form method='POST' action='/nflParser'>
-  <table BORDER = 1>
-    <p>Share your Fan Voice: </p>
-  <p></p>
-  <tr><td><input name='Narrative' type='TEXT'
-      value='The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.'
-    </td>
-    </tr>
-</table>
-<p><em>Click to parse:</em>
-<input value='RUN' type='SUBMIT'></p>
+  <div>
+    <div class="mb2">
+      <!-- <label for="narrative" class="f6 b">Share your Fan Voice</label> -->
+
+
+      <div onclick="example1()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 1</div>
+      <div onclick="example2()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 2</div>
+      <div onclick="example3()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 3</div>
+
+    </div>
+
+    <textarea id="narrative" name="narrative"
+              class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
+              aria-describedby="comment-desc"
+              rows="5"
+              placeholder="Share your Fan Voice"
+              autocapitalize="sentences" wrap="soft"
+              required></textarea>
+
+  </div>
+  <div class="mt3">
+    <input
+      class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
+      type='submit' value='Submit'>
+  </div>
 </form>
 
+<script>
+ const setNarrative = function(s) {
+   document.getElementById('narrative').value = s;
+ }
+ const example1 = function() {
+   setNarrative('The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.');
+ }
+ const example2 = function() {
+   setNarrative('The ushers were very helpful in finding our seats. The seats were uncomfortable. The nachos were tasty');
+ }
+ const example3 = function() {
+   setNarrative('Getting through the security line was a slow process. This could be improved. The new jumbotron was fantastic.');
+ }
+</script>
 {% endblock %}
