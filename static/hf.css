@@ -1,19 +1,20 @@
 body
 {
-max-width:400px;
-margin:50px auto;
-background:#fff;
-border-radius:2px;
-padding:20px;
-font-family: Georgia, "Times New Roman", Times, serif;
+  max-width:400px;
+  margin:50px auto;
+  background:#fff;
+  border-radius:2px;
+  padding:20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
+
 h1{
-display: block;
-text-align: center;
-padding: 0;
-margin: 0px 0px 20px 0px;
-color: #5C5C5C;
-font-size:x-large;
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size:x-large;
 }
 h2 {
   font-size:        150%;
@@ -37,55 +38,55 @@ td, th {
   font-style:       italic;
 }
 .confirmentry {
-  font-weight:      600; 
+  font-weight:      600;
 }
 
 /*** Tables ***/
 
 table {
-font-size:          1em;
-background-color:   #fafcff;
-border:             1px solid #909090;
-color:              #2a2a2a;
-padding:            5px 5px 2px;
-border-collapse:    collapse;
+  font-size:          1em;
+  background-color:   #fafcff;
+  border:             1px solid #909090;
+  color:              #2a2a2a;
+  padding:            5px 5px 2px;
+  border-collapse:    collapse;
 }
 
 td, th {
-border:             thin dotted gray;
+  border:             thin dotted gray;
 }
 
 /*** Inputs ***/
 input[type=text]
 {
-box-sizing: border-box;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-width: 100%;
-display: block;
-outline: none;
-border: none;
-height: 25px;
-line-height: 25px;
-font-size: 16px;
-padding: 0;
-font-family: Georgia, "Times New Roman", Times, serif;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  display: block;
+  outline: none;
+  border: none;
+  height: 25px;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 input[type=submit]
 {
-background: #2471FF;
-border: none;
-padding: 10px 20px 10px 20px;
-border-bottom: 3px solid #5994FF;
-border-radius: 3px;
-color: #D2E2FF;
+  background: #2471FF;
+  border: none;
+  padding: 10px 20px 10px 20px;
+  border-bottom: 3px solid #5994FF;
+  border-radius: 3px;
+  color: #D2E2FF;
 }
 
 input[type="submit"]:hover
 {
-background: #6B9FFF;
-color:#fff;
+  background: #6B9FFF;
+  color:#fff;
 }
 
 select {
