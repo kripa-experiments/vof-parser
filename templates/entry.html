@@ -9,16 +9,15 @@
 </p>
 
 <form method='POST' action='/nflParser'>
-  <table BORDER = 1>
-    <p>Share your Fan Voice: </p>
-    <p></p>
-    <tr><td><input name='Narrative' type='TEXT'
-                   value='The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.'
-    </td>
-    </tr>
-  </table>
-  <p><em>Click to parse:</em>
-    <input value='RUN' type='SUBMIT'></p>
+  <div>
+    <label for="narrative">Share your Fan Voice:</label>
+    <textarea id="narrative" name="narrative" autocapitalize="sentences" wrap="soft" required>
+The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.
+    </textarea>
+  </div>
+  <p>
+    <input type='submit' value='Parse'>
+  </p>
 </form>
 
 {% endblock %}
