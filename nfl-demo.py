@@ -29,7 +29,6 @@ def procFastText(in_text):
 def do_search() -> 'html':
     global narrative, label
     narrative = request.form['narrative'] 
-    # TODO: error handling around empty?
     print('nflParser:',narrative, label)
     #label = 'DUMMY VARIABLE.'
     label = procFastText(narrative)
