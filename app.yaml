@@ -1,4 +1,4 @@
-service: vof-parser
+service: default
 env: flex
 runtime: python
 entrypoint: gunicorn -c gunicorn.conf.py -b :$PORT nfl-demo:app
