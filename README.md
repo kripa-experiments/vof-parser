@@ -24,7 +24,7 @@ make deploy
 You can stream logs from the command line by running:
 
 ```
-gcloud app logs tail -s vof-parser
+gcloud app logs tail
 ```
 
 To view your application in the web browser run:
