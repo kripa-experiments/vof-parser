@@ -1,3 +1,14 @@
 .PHONEY: run
 run:
-	FLASK_ENV=development	pipenv run python nfl-demo.py
+	pipenv run gunicorn -c gunicorn.conf.py -b :8080 nfl-demo:app --reload
+
+.PHONEY: run-prod
+run-prod:
+	pipenv run gunicorn -c gunicorn.conf.py -b :8080 nfl-demo:app
+
+requirements.txt: Pipfile Pipfile.lock
+	pipenv lock --requirements > requirements.txt
+
+.PHONEY: deploy
+deploy: requirements.txt
+	gcloud app deploy app.yaml
