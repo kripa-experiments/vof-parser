@@ -6,9 +6,14 @@ Make sure you have [pipenv](https://docs.pipenv.org/install/) installed. Clone t
 
 ```
 pipenv install
-pipenv run python main.py
+make run
 ```
 
 ## Deploying
 
-**FILL IN**
+
+```
+glcoud auth login
+gcloud config set project vof-parser
+gcloud app deploy app.yaml
+```
