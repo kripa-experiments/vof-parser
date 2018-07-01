@@ -52,3 +52,11 @@ To view your application in the web browser run:
 ```
 gcloud app browse -s vof-parser
 ```
+
+If you want to see the configuration for a deployed app then something like below gives it to you. This can be useful to confirm changes were made when deploying. It can also let you see how autoscaling is configured.
+
+```
+gcloud app versions list
+# Pick out a version that is getting traffic
+gcloud app versions describe -s default VERSION_FROM_ABOVE
+```
