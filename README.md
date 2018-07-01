@@ -13,11 +13,29 @@ You also need to have the [Google Cloud SDK](https://cloud.google.com/sdk/instal
 
 ## Deploying
 
+Make sure you've done the below commands to login to your Google Account and set your project.
 
 ```
 glcoud auth login
 gcloud config set project vof-parser
-make deploy
+```
+
+### Staging
+
+When you want to deploy to a staging environment run the following command. This is useful when you want to try some changes but do not want the DNS entries to point to your new version. You can see the staging environment by going [here](https://staging-dot-vof-parser.appspot.com)
+
+```
+make deploy-staging
+```
+
+When you're done testing staging then run `make stop-staging` to turn it off.
+
+### Production
+
+When you're ready to deploy to production then run the following command.
+
+```
+make deploy-prod
 ```
 
 ## Helpful `gcloud` commands
