@@ -1,6 +1,6 @@
 .PHONEY: run
 run:
-	FLASK_ENV=development	pipenv run python nfl-demo.py
+	pipenv run gunicorn -b :8080 nfl-demo:app --reload
 
 .PHONEY: run-prod
 run-prod:
