@@ -15,5 +15,5 @@ make run
 ```
 glcoud auth login
 gcloud config set project vof-parser
-gcloud app deploy app.yaml
+make deploy
 ```
