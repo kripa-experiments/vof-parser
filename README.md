@@ -9,6 +9,8 @@ pipenv install
 make run
 ```
 
+You also need to have the [Google Cloud SDK](https://cloud.google.com/sdk/install) to get the `gcloud` command.
+
 ## Deploying
 
 
