@@ -13,10 +13,11 @@
       <!-- <label for="narrative" class="f6 b">Share your Fan Voice</label> -->
 
 
-      <div onclick="example1()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 1</div>
-      <div onclick="example2()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 2</div>
-      <div onclick="example3()" class="f6 link dim br1 ba ph3 pv2 mb2 dib black">Example 3</div>
+      <div onclick="example1()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 1</div>
+      <div onclick="example2()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 2</div>
+      <div onclick="example3()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 3</div>
 
+      <!-- input-reset -->
     </div>
 
     <textarea id="narrative" name="narrative"
@@ -28,25 +29,129 @@
               required></textarea>
 
   </div>
-  <div class="mt3">
-    <input
-      class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
-      type='submit' value='Submit'>
+  <div class="dib mt3">
+    <input class="input-reset b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
+    <div id="talk" onclick="startRecognition(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
   </div>
 </form>
 
+
+
+
 <script>
- const setNarrative = function(s) {
+ var setNarrative = function(s) {
    document.getElementById('narrative').value = s;
  }
- const example1 = function() {
+
+ var example1 = function() {
    setNarrative('The parking delayed us by over an hour. The fries made up for this a little. The team win made up for a lot.');
  }
- const example2 = function() {
+
+ var example2 = function() {
    setNarrative('The ushers were very helpful in finding our seats. The seats were uncomfortable. The nachos were tasty');
  }
- const example3 = function() {
+
+ var example3 = function() {
    setNarrative('Getting through the security line was a slow process. This could be improved. The new jumbotron was fantastic.');
  }
+
+ var final_transcript = '';
+ var recognizing = false;
+ var ignore_onend;
+ var start_timestamp;
+
+ var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition;
+ if (!SpeechRecognition) {
+   console.log('no speech recognition');
+   document.getElementById('talk').style.display = 'none';
+ } else {
+   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+   var recognition = new SpeechRecognition();
+
+   recognition.continuous = true;
+   recognition.interimResults = true;
+
+   recognition.onstart = function() {
+     recognizing = true;
+     console.log('info_speak_now');
+     /* start_img.src = 'mic-animate.gif'; */
+   };
+
+   recognition.onerror = function(event) {
+     if (event.error == 'no-speech') {
+       /* start_img.src = 'mic.gif'; */
+       console.log('info_no_speech');
+       ignore_onend = true;
+     }
+     if (event.error == 'audio-capture') {
+       /* start_img.src = 'mic.gif'; */
+       console.log('info_no_microphone');
+       ignore_onend = true;
+     }
+     if (event.error == 'not-allowed') {
+       if (event.timeStamp - start_timestamp < 100) {
+         console.log('info_blocked');
+       } else {
+         console.log('info_denied');
+       }
+       ignore_onend = true;
+     }
+   };
+
+   recognition.onend = function() {
+     recognizing = false;
+     if (ignore_onend) {
+       return;
+     }
+     /* start_img.src = 'mic.gif'; */
+     if (!final_transcript) {
+       console.log('info_start');
+       return;
+     }
+     console.log('');
+     if (window.getSelection) {
+       window.getSelection().removeAllRanges();
+       var range = document.createRange();
+       range.selectNode(document.getElementById('narrative'));
+       window.getSelection().addRange(range);
+     }
+   };
+
+   recognition.onresult = function(event) {
+     var interim_transcript = '';
+     for (var i = event.resultIndex; i < event.results.length; ++i) {
+       if (event.results[i].isFinal) {
+         final_transcript += event.results[i][0].transcript;
+         final_transcript = capitalize(final_transcript);
+         setNarrative(final_transcript);
+       } else {
+         interim_transcript += event.results[i][0].transcript;
+         interim_transcript = capitalize(interim_transcript);
+         setNarrative(final_transcript + interim_transcript);
+       }
+     }
+   };
+ }
+
+ var first_char = /\S/;
+ function capitalize(s) {
+   return s.replace(first_char, function(m) { return m.toUpperCase(); });
+ }
+
+ var startRecognition = function(event) {
+   if (recognizing) {
+     recognition.stop();
+     return;
+   }
+   final_transcript = '';
+   recognition.lang = 'en-US';
+   recognition.start();
+   ignore_onend = false;
+   // start_img.src = 'mic-slash.gif';
+   // console.log('info_allow');
+   // showButtons('none');
+   start_timestamp = event.timeStamp;
+ }
 </script>
+
 {% endblock %}
