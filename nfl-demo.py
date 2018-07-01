@@ -20,7 +20,7 @@ def proc_fasttext(in_text):
             if len(sentence) > 3:
                 fwrite.write(sentence+'\n')
     # PLACEHOLDER FOR TEXT PARSER THAT RETURNS LIST OF LABELS AND SCORES
-    dlist = ['__label__Food_3','__label__Team_10']
+    dlist = ['__label__Food_3','__label__Team_10', 'parking', 'seats', 'directions']
     clean_labels = [clean_label(d) for d in dlist]
     print(clean_labels)
     return clean_labels

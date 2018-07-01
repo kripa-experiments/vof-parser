@@ -31,9 +31,9 @@
 
 {% if the_match %}
   <p class="f5 b">Underlying Issues</p>
-  <ul class="list">
+  <div class="flex flex-wrap">
     {% for label in the_match %}
-      <li class="dib mr1 mb2 f6 b db pa2 dark-gray ba b--black-20">{{ label }}</li>
+      <div class="ba br4 pa2 mr2 mv1">{{ label }}</div>
     {% endfor %}
   </ul>
 {% endif %}
