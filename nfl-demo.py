@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import random as rnd
 import subprocess as subproc
 import sys
@@ -32,22 +32,19 @@ def do_search() -> 'html':
     print('nflParser:',narrative, label)
     #label = 'DUMMY VARIABLE.'
     label = procFastText(narrative)
-    return render_template('results.html',
+    return render_template('entry.html',
                            the_query=narrative,
                            the_match=label)
+
+@app.route('/nflParser', methods=['GET'])
+def back_to_home():
+    return redirect('/')
 
 @app.route('/')
 @app.route('/entry')
 def entry_page() -> 'html':
     global narrative, label
     print('ENTRY:',narrative, label)
-    return render_template('entry.html')
-
-@app.route('/retry', methods=['POST'])
-def retry_page() -> 'html':
-    global narrative, label
-    print('RETRY:',narrative, label)
-
     return render_template('entry.html')
 
 if __name__ == '__main__':

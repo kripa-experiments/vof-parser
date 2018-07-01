@@ -7,7 +7,7 @@
 <p class="lh-copy">
   Converts natural language feedback into actionable topic areas and ratings consistent with fan survey data.
 </p>
-<form method='POST' action='/nflParser'>
+<form class="button-reset input-reset" method='POST' action='/nflParser'>
   <div>
 
     <div onclick="example1()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 1</div>
@@ -20,14 +20,18 @@
               rows="5"
               placeholder="Share your Fan Voice"
               autocapitalize="sentences" wrap="soft"
-              required></textarea>
+              required>{% if the_query %}{{ the_query }}{% endif %}</textarea>
 
   </div>
   <div class="dib mt2">
-    <input class="input-reset b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
+    <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
     <div id="talk" onclick="startRecognition(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
   </div>
 </form>
+
+{% if the_match %}
+  Underlying Issues: {{ the_match }}
+{% endif %}
 
 
 <script>
