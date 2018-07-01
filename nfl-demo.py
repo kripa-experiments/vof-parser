@@ -30,16 +30,12 @@ def proc_fasttext(in_text):
     print(clean_labels)
     return clean_labels
 
-@app.route('/nflParser', methods=['POST'])
+@app.route('/', methods=['POST'])
 def do_search() -> 'html':
     narrative = request.form['narrative'] 
     labels = proc_fasttext(narrative)
     print('nflParser:',narrative, labels)
     return render_template('entry.html', the_query=narrative, the_match=labels)
-
-@app.route('/nflParser', methods=['GET'])
-def back_to_home():
-    return redirect('/')
 
 @app.route('/')
 @app.route('/entry')
