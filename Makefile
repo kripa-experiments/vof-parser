@@ -1,10 +1,10 @@
 .PHONEY: run
 run:
-	pipenv run gunicorn -b :8080 nfl-demo:app --reload
+	pipenv run gunicorn -c gunicorn.conf.py -b :8080 nfl-demo:app --reload
 
 .PHONEY: run-prod
 run-prod:
-	pipenv run gunicorn -b :8080 nfl-demo:app
+	pipenv run gunicorn -c gunicorn.conf.py -b :8080 nfl-demo:app
 
 requirements.txt: Pipfile Pipfile.lock
 	pipenv lock --requirements > requirements.txt
