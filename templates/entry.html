@@ -61,6 +61,10 @@
    var ignore_onend;
    var start_timestamp;
 
+   // Portions of the SpeechRecognition code below was taken from
+   // https://github.com/googlearchive/webplatform-samples under the
+   // Apache 2.0 License (found here https://github.com/googlearchive/webplatform-samples/blob/047663d1362137db06da1c260f9c2f0d2c59e4dc/LICENSE
+
    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition;
    if (!SpeechRecognition) {
      console.log('no speech recognition');
