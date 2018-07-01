@@ -17,3 +17,18 @@ glcoud auth login
 gcloud config set project vof-parser
 make deploy
 ```
+
+## Helpful `gcloud` commands
+
+
+You can stream logs from the command line by running:
+
+```
+gcloud app logs tail -s vof-parser
+```
+
+To view your application in the web browser run:
+
+```
+gcloud app browse -s vof-parser
+```
