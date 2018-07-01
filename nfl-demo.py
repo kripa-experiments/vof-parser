@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sslify import SSLify
 import random as rnd
 import subprocess as subproc
 import sys
 
 app = Flask(__name__)
+sslify = SSLify(app)
 
 def clean_label(unclean_label):
     return unclean_label.replace('__label__','').replace('_',' ').upper()
