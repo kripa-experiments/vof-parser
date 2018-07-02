@@ -16,6 +16,7 @@ requirements.txt: Pipfile Pipfile.lock
 .PHONEY: deploy-staging
 deploy-staging: requirements.txt
 	gcloud app deploy --version staging --no-promote app.yaml
+	gcloud app versions start staging
 
 .PHONEY: stop-staging
 stop-staging:
