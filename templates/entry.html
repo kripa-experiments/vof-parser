@@ -2,42 +2,42 @@
 
 {% block body %}
 
-  <h1 class="f3 f2-m f1-l">Metonymize VoF Parser</h1>
-  <h2 class="f5 f4-m f3-l">Map NFL Voice of Fan from Game Day into actionable records.</h2>
-  <p class="lh-copy">
-    Converts natural language feedback into actionable topic areas and ratings consistent with fan survey data.
-  </p>
-  <form class="button-reset input-reset" method='POST' action='/'>
-    <div>
+<h1 class="f3 f2-m f1-l">Metonymize VoF Parser</h1>
+<h2 class="f5 f4-m f3-l">Map Voice of Fan into actionable records.</h2>
+<p class="lh-copy">
+  Converts natural language feedback into actionable topic areas and ratings consistent with fan survey data.
+</p>
+<form class="button-reset input-reset" method='POST' action='/'>
+  <div>
 
-      <div onclick="example1()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 1</div>
-      <div onclick="example2()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 2</div>
-      <div onclick="example3()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 3</div>
+    <div onclick="example1()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 1</div>
+    <div onclick="example2()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 2</div>
+    <div onclick="example3()" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Example 3</div>
 
-      <textarea id="narrative" name="narrative"
-                class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
-                aria-describedby="comment-desc"
-                rows="5"
-                placeholder="Share your Fan Voice"
-                autocapitalize="sentences" wrap="soft"
-                required>{% if the_query %}{{ the_query }}{% endif %}</textarea>
+    <textarea id="narrative" name="narrative"
+              class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
+              aria-describedby="comment-desc"
+              rows="5"
+              placeholder="Share your Fan Voice"
+              autocapitalize="sentences" wrap="soft"
+              required>{% if the_query %}{{ the_query }}{% endif %}</textarea>
 
-    </div>
-    <div class="dib mt2">
-      <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
-      <div id="talk" onclick="startRecognition(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
-    </div>
-  </form>
+  </div>
+  <div class="dib mt2">
+    <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
+    <div id="talk" onclick="startRecognition(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
+  </div>
+</form>
 
-  {% if the_error %}
-    <div class="mv3 f5 b dark-red">{{ the_error }}</div>
-  {% endif %}
-  {% if the_match %}
-    <div class="mv3 f5 b">Underlying Issues</div>
-    <div class="flex flex-wrap">
-      {% for label in the_match %}
-        <div class="ba br4 pa2 mr2 mv1">{{ label }}</div>
-      {% endfor %}
+{% if the_error %}
+<div class="mv3 f5 b dark-red">{{ the_error }}</div>
+{% endif %}
+{% if the_match %}
+<div class="mv3 f5 b">Underlying Issues</div>
+<div class="flex flex-wrap">
+  {% for label in the_match %}
+  <div class="ba br4 pa2 mr2 mv1">{{ label }}</div>
+  {% endfor %}
   </ul>
   {% endif %}
 
