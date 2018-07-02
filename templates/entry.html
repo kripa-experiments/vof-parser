@@ -29,8 +29,11 @@
     </div>
   </form>
 
+  {% if the_error %}
+    <div class="mv3 f5 b dark-red">{{ the_error }}</div>
+  {% endif %}
   {% if the_match %}
-    <p class="f5 b">Underlying Issues</p>
+    <div class="mv3 f5 b">Underlying Issues</div>
     <div class="flex flex-wrap">
       {% for label in the_match %}
         <div class="ba br4 pa2 mr2 mv1">{{ label }}</div>

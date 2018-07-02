@@ -3,6 +3,8 @@ from flask_sslify import SSLify
 import random as rnd
 import subprocess as subproc
 import sys
+import requests
+import json
 
 app = Flask(__name__)
 sslify = SSLify(app)
@@ -12,24 +14,46 @@ def clean_label(unclean_label):
 
 def proc_fasttext(in_text):
     cleaned_text = in_text.strip().lower()
-    dlist = ['__label__Food_3','__label__Team_10']
-    if 'seats' in in_text:
-        dlist.append('seats_10')
-    if 'usher' in in_text:
-        dlist.append('staff_8')
-    if 'security' in in_text:
-        dlist.append('security_8')
+    print('Requesting labels for "%s"' % (cleaned_text))
 
-    clean_labels = [clean_label(d) for d in dlist]
+    try:
+        r = requests.post('http://35.226.125.1:8085/nfl_vof_parse', json={'vof-text': cleaned_text}, timeout=5)    
+    except requests.exceptions.HTTPError as errh:
+        print("Http Error:",errh)
+    except requests.exceptions.ConnectionError as errc:
+        print("Error Connecting:",errc)
+        return ['Error connecting to model. Please try again later.', None]
+    except requests.exceptions.Timeout as errt:
+        print("Timeout Error:",errt)
+        return ['Timeout connecting to model. Please try again later.', None]
+    except requests.exceptions.RequestException as err:
+        print("OOps: Something Else",err)
+        return ['Unknown error. Please try again later.', None]
+
+    if (r.status_code == 200):
+        data = r.json()
+        print('Received %s from Parser' % (data))
+        labels = data.get('parsed-list', ['FOOD 4', 'SAFETY 5'])
+    else:
+        print('Bad response from Parser %s. Faking it.' % (r.status_code))
+        labels = ['__label__Food_3','__label__Team_10']
+        if 'seats' in in_text:
+            labels.append('seats_10')
+        if 'usher' in in_text:
+            labels.append('staff_8')
+        if 'security' in in_text:
+            labels.append('security_8')
+    
+    clean_labels = [clean_label(x) for x in labels]
     print(clean_labels)
-    return clean_labels
+    return [None, clean_labels]
 
 @app.route('/', methods=['POST'])
 def do_search() -> 'html':
     narrative = request.form['narrative'] 
-    labels = proc_fasttext(narrative)
-    print('nflParser:',narrative, labels)
-    return render_template('entry.html', the_query=narrative, the_match=labels)
+    [error, labels] = proc_fasttext(narrative)
+    print('Narrative: %s, labels: %s, error: %s' % (narrative, labels, error))
+    return render_template('entry.html', the_query=narrative, the_match=labels, the_error=error)
 
 @app.route('/')
 @app.route('/entry')
