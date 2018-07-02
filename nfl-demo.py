@@ -11,15 +11,7 @@ def clean_label(unclean_label):
     return unclean_label.replace('__label__','').replace('_',' ').upper()
 
 def proc_fasttext(in_text):
-    ft_in_file = 'temp.buffer'
     cleaned_text = in_text.strip().lower()
-    sentences_text = cleaned_text.split('.')
-    with open(ft_in_file,'w') as fwrite:
-        #fwrite.write('the fries were cold')
-        for sentence in sentences_text:
-            if len(sentence) > 3:
-                fwrite.write(sentence+'\n')
-    # PLACEHOLDER FOR TEXT PARSER THAT RETURNS LIST OF LABELS AND SCORES
     dlist = ['__label__Food_3','__label__Team_10']
     if 'seats' in in_text:
         dlist.append('seats_10')
