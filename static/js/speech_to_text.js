@@ -2,6 +2,11 @@ function consoleLogger(text, data) {
   console.log(text + " " + (data || ''));
 }
 
+var updateInterval;
+var timeDisplay;
+var startTime;
+var maxRecordTime = 15 * 1E3;
+
 var recorder = new Recorder({
   monitorGain: 0,
   recordingGain: 1,
@@ -45,6 +50,7 @@ recorder.ondataavailable = function(typedArray) {
   
   http.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
+      timeDisplay.innerText = '';
       setNarrative(http.responseText)
     }
     if (this.readyState === 4 && this.status === 500) {
@@ -64,10 +70,6 @@ var toggleRecording = function() {
   }
 }
 
-var updateInterval;
-var timeDisplay;
-var startTime;
-var maxRecordTime = 15 * 1E3;
 
 var setTimeDisplay = function() {
   var elapsed = Date.now() - startTime;
@@ -99,7 +101,7 @@ var stopRecording = function() {
   recorder.stop();
 
   clearInterval(updateInterval);
-  timeDisplay.innerText = '';
+  timeDisplay.innerText = 'Analyzing....';
   
   var x = document.getElementById('talk');
   x.classList.remove('dark-red')
