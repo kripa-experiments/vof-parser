@@ -64,6 +64,21 @@ var toggleRecording = function() {
   }
 }
 
+var updateInterval;
+var timeDisplay;
+var startTime;
+var maxRecordTime = 15 * 1E3;
+
+var setTimeDisplay = function() {
+  var elapsed = Date.now() - startTime;
+  if (elapsed >= maxRecordTime) {
+    stopRecording();
+  } else if (1E3 <= elapsed) {
+    elapsed = 1E4 > elapsed ? "0" + elapsed.toString().slice(0, -3) : elapsed.toString().slice(0, -3);
+    timeDisplay.innerText = "00:" + elapsed + " / 00:" + maxRecordTime / 1E3;
+  }  
+}
+
 var startRecording = function() {
   recorder.start().catch(function(e){
     console.log('Error encountered:', e.message );
@@ -71,10 +86,20 @@ var startRecording = function() {
   var x = document.getElementById('talk');
   x.classList.add('dark-red')
   x.innerText = 'Stop'
+  timeDisplay = document.getElementById('timeDisplay');
+  timeDisplay.innerText = "00:00 / 00:" + maxRecordTime / 1E3;
+  startTime = Date.now();
+  updateInterval = setInterval(function() {
+    setTimeDisplay();
+  });
 }
 
 var stopRecording = function() {
   recorder.stop();
+
+  clearInterval(updateInterval);
+  timeDisplay.innerText = '';
+  
   var x = document.getElementById('talk');
   x.classList.remove('dark-red')
   x.innerText = 'Talk'
