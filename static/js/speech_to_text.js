@@ -92,6 +92,7 @@ var startRecording = function() {
   updateInterval = setInterval(function() {
     setTimeDisplay();
   });
+  setNarrative('');
 }
 
 var stopRecording = function() {
