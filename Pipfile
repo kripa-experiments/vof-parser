@@ -8,6 +8,7 @@ flask = "*"
 gunicorn = "*"
 flask-sslify = "*"
 requests = "*"
+google-cloud-speech = "*"
 
 [dev-packages]
 
