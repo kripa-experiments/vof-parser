@@ -25,7 +25,8 @@
   </div>
   <div class="dib mt2">
     <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type='submit' value='Submit'>
-    <div id="talk" onclick="startRecognition(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
+    <div id="talk" onclick="toggleRecording(event)" class="f6 dim br1 ba ph3 pv2 mb2 dib grow pointer black">Talk</div>
+    <div id="timeDisplay" class="dib f6"></div>
   </div>
 </form>
 
@@ -40,8 +41,6 @@
   {% endfor %}
   </ul>
   {% endif %}
-
-
   <script>
    var setNarrative = function(s) {
      document.getElementById('narrative').value = s;
@@ -58,105 +57,6 @@
    var example3 = function() {
      setNarrative('Getting through the security line was a slow process. This could be improved. The new jumbotron was fantastic.');
    }
-
-   var final_transcript = '';
-   var recognizing = false;
-   var ignore_onend;
-   var start_timestamp;
-
-   // Portions of the SpeechRecognition code below was taken from
-   // https://github.com/googlearchive/webplatform-samples under the
-   // Apache 2.0 License (found here https://github.com/googlearchive/webplatform-samples/blob/047663d1362137db06da1c260f9c2f0d2c59e4dc/LICENSE
-
-   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition;
-   if (!SpeechRecognition) {
-     console.log('no speech recognition');
-     document.getElementById('talk').style.display = 'none';
-   } else {
-     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-     var recognition = new SpeechRecognition();
-
-     recognition.continuous = true;
-     recognition.interimResults = true;
-
-     recognition.onstart = function() {
-       recognizing = true;
-       console.log('info_speak_now');
-       document.getElementById('talk').classList.add('dark-red');
-     };
-
-     recognition.onerror = function(event) {
-       if (event.error == 'no-speech') {
-         document.getElementById('talk').classList.remove('dark-red');
-         console.log('info_no_speech');
-         ignore_onend = true;
-       }
-       if (event.error == 'audio-capture') {
-         document.getElementById('talk').classList.remove('dark-red');
-         console.log('info_no_microphone');
-         ignore_onend = true;
-       }
-       if (event.error == 'not-allowed') {
-         if (event.timeStamp - start_timestamp < 100) {
-           console.log('info_blocked');
-         } else {
-           console.log('info_denied');
-         }
-         ignore_onend = true;
-       }
-     };
-
-     recognition.onend = function() {
-       recognizing = false;
-       if (ignore_onend) {
-         return;
-       }
-       document.getElementById('talk').classList.remove('dark-red')
-       if (!final_transcript) {
-         console.log('info_start');
-         return;
-       }
-       console.log('');
-       if (window.getSelection) {
-         window.getSelection().removeAllRanges();
-         var range = document.createRange();
-         range.selectNode(document.getElementById('narrative'));
-         window.getSelection().addRange(range);
-       }
-     };
-
-     recognition.onresult = function(event) {
-       var interim_transcript = '';
-       for (var i = event.resultIndex; i < event.results.length; ++i) {
-         if (event.results[i].isFinal) {
-           final_transcript += event.results[i][0].transcript;
-           final_transcript = capitalize(final_transcript);
-           setNarrative(final_transcript);
-         } else {
-           interim_transcript += event.results[i][0].transcript;
-           interim_transcript = capitalize(interim_transcript);
-           setNarrative(final_transcript + interim_transcript);
-         }
-       }
-     };
-   }
-
-   var first_char = /\S/;
-   function capitalize(s) {
-     return s.replace(first_char, function(m) { return m.toUpperCase(); });
-   }
-
-   var startRecognition = function(event) {
-     if (recognizing) {
-       recognition.stop();
-       return;
-     }
-     final_transcript = '';
-     recognition.lang = 'en-US';
-     recognition.start();
-     ignore_onend = false;
-     start_timestamp = event.timeStamp;
-   }
   </script>
 
-{% endblock %}
+  {% endblock %}
