@@ -7,7 +7,7 @@ Understand the Voice of the Fan at at <https://vof.metonymize.co> or <https://me
 Make sure you have [pipenv](https://docs.pipenv.org/install/) installed. Clone the repository locally, and then run the following commands.
 
 ```
-pipenv install
+pipenv install --ignore-pipfile
 make run
 ```
 
