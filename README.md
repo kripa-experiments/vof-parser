@@ -15,16 +15,37 @@ You also need to have the [Google Cloud SDK](https://cloud.google.com/sdk/instal
 
 ## Deploying
 
-Make sure you've done the below commands to login to your Google Account and set your project.
+First part of this has instructions about initializing with Google
+Cloud. Other steps are about deploying to various targets.
+
+### First time
+
+If this is your first time with this project, then use the below
+command to trigger the initialization flow. Login to your
+@metolabs.com account and set your project to vof-parser. Call your
+local configuration vof.
 
 ```
-glcoud auth login
-gcloud config set project vof-parser
+gcloud init
+```
+
+### Any time but first
+
+If you've already setup a local configuration, then use the following
+command to set it when you start working on this project.
+
+
+```
+gcloud config configurations vof
 ```
 
 ### Staging
 
-When you want to deploy to a staging environment run the following command. This is useful when you want to try some changes but do not want the DNS entries to point to your new version. You can see the staging environment by going [here](https://staging-dot-vof-parser.appspot.com)
+When you want to deploy to a staging environment run the following
+command. This is useful when you want to try some changes but do not
+want the DNS entries to point to your new version. You can see the
+staging environment by going
+[here](https://staging-dot-vof-parser.appspot.com)
 
 ```
 make deploy-staging
