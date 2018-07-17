@@ -5,7 +5,7 @@ init:
 run:
 	FLASK_ENV=development pipenv run gunicorn -c gunicorn.conf.py -b :8080 nfl-demo:app --reload
 
-run-reload-templates:
+run-local-ssl:
 	FLASK_ENV=development	pipenv run python nfl-demo.py
 
 run-prod:

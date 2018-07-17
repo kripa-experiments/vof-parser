@@ -4,11 +4,21 @@ Understand the Voice of the Fan at at <https://vof.metonymize.co> or <https://me
 
 # Developing
 
-Make sure you have [pipenv](https://docs.pipenv.org/install/) installed. Clone the repository locally, and then run the following commands.
+Make sure you have [pipenv](https://docs.pipenv.org/install/) installed. First, clone the repository locally.
+
+If you want to use the text to speech locally then you'll also need to
+setup the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to
+point towards a json file that has the permissions requires to access
+the Google Cloud Speech API. This needs to point a credential file
+created through [the credentials
+screen](https://console.cloud.google.com/apis/credentials?project=vof-parser&authuser=2&organizationId=184050855214)
+of the VoF Parser project.
+
 
 ```
 pipenv install --ignore-pipfile
-make run
+# This is the target that lets you use SSL locally (with warnings) so audio api works.
+make run-local-ssl 
 ```
 
 You also need to have the [Google Cloud SDK](https://cloud.google.com/sdk/install) to get the `gcloud` command.

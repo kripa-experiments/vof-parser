@@ -97,4 +97,4 @@ def speech_to_text():
 if __name__ == '__main__':
     rnd.seed()
     print('Starting MAIN:')
-    app.run('0.0.0.0', 8080)
+    app.run('0.0.0.0', 8080, ssl_context='adhoc')
