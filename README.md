@@ -46,7 +46,7 @@ command to set it when you start working on this project.
 
 
 ```
-gcloud config configurations vof
+gcloud config configurations activate vof
 ```
 
 ### Staging
